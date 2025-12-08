@@ -31,7 +31,7 @@ def compare_whole_string(secret, candidate):  # Compare the whole string instead
 
 
 def pad_time(secret, candidate):  # Add more time to sleep() to equalize time spent for both matches and mismatches
-    threshold = 0.0005  # Please reduce threshold if OS scheduling is different from us
+    threshold = 0.001  # Please increase threshold if OS scheduling is different from us
 
     begin = time.perf_counter()
     compare = vulnerableCompare(secret, candidate)
