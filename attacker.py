@@ -13,7 +13,7 @@ ALPHABET = string.ascii_letters + string.digits + string.punctuation
 
 def measure(candid):
     """TODO"""
-    def trimmed_mean_10(data):
+    def trimmed_mean_10(data):  # Helper function for removing outliers for more stable time measurements
         data = sorted(data)
         count = int(0.05*len(data))
         data = data[count:(len(data)-count)]
@@ -64,7 +64,7 @@ def recover(max_len=7):
     return password
 
 
-def plot(trial, rec_pass, real_pass):  # For Trial Sweep
+def plot(trial, rec_pass, real_pass):  # For Trial Sweep / Plot Success Rate vs. Number of Trials
 
     success_list = []
 
@@ -89,12 +89,12 @@ def plot(trial, rec_pass, real_pass):  # For Trial Sweep
     
         
 if __name__=="__main__":
-    run_more_trials = False  # For Trial Sweep / Can be changed
+    run_more_trials = False  # For Trial Sweep / True for a multiple-trial run (with plots), False for a fixed 120-trial run
 
-    if run_more_trials == True:  # Trial Sweep
+    if run_more_trials == True:  # Trial Sweep / Run multiple number of trials, and plot them
         pass_list = [] 
         trial_list = [30, 60, 90, 120]
-        real_password = "S3cret!"  # Can be changed
+        real_password = "S3cret!"
 
         for i in trial_list:
             TRIALS = i

@@ -31,7 +31,7 @@ def compare_whole_string(secret, candidate):  # Compare the whole string instead
 
 
 def pad_time(secret, candidate):  # Add more time to sleep() to equalize time spent for both matches and mismatches
-    threshold = 0.0005
+    threshold = 0.0005  # Please reduce threshold if OS scheduling is different from us
 
     begin = time.perf_counter()
     compare = vulnerableCompare(secret, candidate)
@@ -65,7 +65,7 @@ with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
             if not data:
                 continue
             candidate = data.strip()
-            #ok = compare_whole_string(SECRET, candidate)
-            #ok = pad_time(SECRET, candidate)
-            ok = jitter(SECRET, candidate)
+            ok = compare_whole_string(SECRET, candidate)  # Uncomment to use constant time comparison defense
+            #ok = pad_time(SECRET, candidate)  # Uncomment to use time padding defense
+            #ok = jitter(SECRET, candidate)  # Uncomment to use random jitter adding defense
             conn.sendall(b"1" if ok else b"0")
